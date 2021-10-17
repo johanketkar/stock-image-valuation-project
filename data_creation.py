@@ -6,16 +6,6 @@ import os
 
 quandl.ApiConfig.api_key = "guVoWEQKcUx8-R9JxKbp"
 
-'''
-# create list of s&p500 constituents
-
-df = quandl.get_table('SHARADAR/SP500', date={'gte': '1998-01-01', 'lte': '2021-10-15'}, paginate=True)
-sp500 = pd.DataFrame(df['ticker'].unique())
-sp500.columns = ["ticker"]
-sp500 = sp500.sort_values(by='ticker').reset_index(drop=True)
-sp500.to_csv("SP500_all_constituents.csv")
-'''
-
 sp500 = pd.read_csv("C:/Users/nssco/OneDrive/Documents/Nick/stock-valuation-cnn/SP500_all_constituents.csv")
 sp500.columns = ["index", "ticker"]
 sp500.pop("index")
@@ -80,31 +70,6 @@ coverage["2017_Missing"] = np.nan
 coverage["2018_Missing"] = np.nan
 coverage["2019_Missing"] = np.nan
 coverage["2020_Missing"] = np.nan
-
-
-# df = quandl.get_table('SHARADAR/SF1', ticker='BBI1', calendardate={'gte': '1998-01-01', 'lte': '2020-12-31'})
-# print(df.empty)
-# start_year = df.calendardate.min().date()
-# end_year = df.calendardate.max().year
-# year_df = df[df.calendardate.dt.year == 2019]
-# fy_df = year_df[(year_df.dimension == 'MRY') | (year_df.dimension == 'ARY')].reset_index(drop=True)
-# q1_df = year_df[df.calendardate.dt.month == 3].reset_index(drop=True)
-# q2_df = year_df[df.calendardate.dt.month == 6].reset_index(drop=True)
-# q3_df = year_df[df.calendardate.dt.month == 9].reset_index(drop=True)
-# q4_df = year_df[(df.calendardate.dt.month == 12) & ((year_df.dimension != 'MRY') & (year_df.dimension != 'ARY'))].reset_index(drop=True)
-# print(year_df)
-# print(fy_df)
-# print(q1_df)
-# print(q2_df)
-# print(q3_df)
-# print(q4_df)
-
-# test_list = ['A', 'AAL', 'AAMRQ', 'AAP', 'AAPL']
-
-# coverage.loc[[0], ['2020_Missing']].append(("test", "test23"))
-
-# print(coverage.head)
-# print(coverage.loc[[0], ['2020_Missing']])
 
 
 for t in sp500['ticker']:
@@ -181,5 +146,4 @@ for t in sp500['ticker']:
 
 
 coverage.to_csv('C:/Users/nssco/OneDrive/Documents/Nick/stock-valuation-cnn/data/coverage_by_ticker.csv')
-# print(coverage)
 
