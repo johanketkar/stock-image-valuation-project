@@ -7,6 +7,8 @@ import os
 quandl.ApiConfig.api_key = "guVoWEQKcUx8-R9JxKbp"
 
 '''
+# create list of s&p500 constituents
+
 df = quandl.get_table('SHARADAR/SP500', date={'gte': '1998-01-01', 'lte': '2021-10-15'}, paginate=True)
 sp500 = pd.DataFrame(df['ticker'].unique())
 sp500.columns = ["ticker"]
