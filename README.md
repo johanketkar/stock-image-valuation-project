@@ -1,1 +1,1 @@
-# stock-valuation-cnn
+# stock-valuation-project
