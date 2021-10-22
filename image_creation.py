@@ -18,12 +18,13 @@ mry = mry[7:]
 
 mrq = mrq.reshape(15,7)
 mrt = mrt.reshape(15,7)
+mry = mry.reshape(15,7)
 zeros = np.zeros((15,7), 'uint8')
 print(mrq)
 print(len(mrt))
 print(len(mry))
 
-rgb = np.dstack((mrq,mrt, zeros)).astype('uint8')
+rgb = np.dstack((mrq, mrt, mry)).astype('uint8')
 
 
 img = Image.fromarray(rgb, mode='RGB')
