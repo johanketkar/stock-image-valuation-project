@@ -65,7 +65,11 @@ for t in constants.SP500_TICKERS:
     coverage_df = mrq_coverage_df.append(mry_coverage_df).append(mrt_coverage_df)
     #coverage_df.to_csv(os.path.join(constants.DATA_PATH, coverage_file_name))
 
-print(indicator_total_null_dict)
+indicator_percent_null_dict = {}
+for indicator in indicator_total_null_dict:
+    indicator_percent_null_dict[indicator] = indicator_total_null_dict[indicator] / total_reports
+
+print(indicator_percent_null_dict)
 
 
     
