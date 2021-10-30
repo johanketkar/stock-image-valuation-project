@@ -63,7 +63,7 @@ for t in constants.SP500_TICKERS:
     mrt_coverage_df = pd.DataFrame(mrt_coverage, index = [0])
  
     coverage_df = mrq_coverage_df.append(mry_coverage_df).append(mrt_coverage_df)
-    coverage_df.to_csv(os.path.join(constants.DATA_PATH, coverage_file_name))
+    #coverage_df.to_csv(os.path.join(constants.DATA_PATH, coverage_file_name))
 
 indicator_percent_covered_dict = {}
 for indicator in indicator_total_null_dict:
@@ -71,7 +71,7 @@ for indicator in indicator_total_null_dict:
 
 indicator_coverage_df = pd.DataFrame(indicator_percent_covered_dict, index = [0])
 indicator_coverage_file_name = 'SF1/indicator_coverage.csv'
-indicator_coverage_df.to_csv(os.path.join(constants.DATA_PATH), indicator_coverage_df)
+indicator_coverage_df.to_csv(os.path.join(constants.DATA_PATH, indicator_coverage_file_name))
 
 
     
