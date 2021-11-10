@@ -24,6 +24,23 @@ Q3_REPORT_MONTH_DAY_STRING = '09-30'
 Q4_REPORT_MONTH_DAY_STRING = '12-31'
 ANNUAL_REPORT_MONTH_DAY_STRING = '12-31'
 
+quarter_report_dates = []
+yearly_report_dates = []
+for year in ALL_YEARS:
+    q1 = str(year) + '-' + Q1_REPORT_MONTH_DAY_STRING
+    q2 = str(year) + '-' + Q2_REPORT_MONTH_DAY_STRING
+    q3 = str(year) + '-' + Q3_REPORT_MONTH_DAY_STRING
+    q4 = str(year) + '-' + Q4_REPORT_MONTH_DAY_STRING
+    yearly = str(year) + '-' + ANNUAL_REPORT_MONTH_DAY_STRING
+    quarter_report_dates.append(q1)
+    quarter_report_dates.append(q2)
+    quarter_report_dates.append(q3)
+    quarter_report_dates.append(q4)
+    yearly_report_dates.append(yearly)
+
+QUARTERLY_REPORT_DATES = quarter_report_dates
+YEARLY_REPORT_DATES = yearly_report_dates
+
 # ticker list
 sp500 = pd.read_csv(os.path.join(DATA_PATH, 'SP500_all_constituents.csv'))
 sp500.columns = ["index", "ticker"]
