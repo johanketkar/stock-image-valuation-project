@@ -1,6 +1,8 @@
+from PIL import Image
 import pandas as pd
 import os
 import constants
+import numpy as np
 
 # helper function to get calendardate 2 quarters from given date
 
@@ -52,13 +54,31 @@ def percent_price_change(date_0, df):
 # helper function to create image from row of dataframe
 
 
-def mrq_mrt_image(date, df):
+def mrq_mrt_image(date, df, filename):
+    mrq_row = df[((df['dimension'] == 'MRQ') & (df['calendardate'] == date))]
+    mrt_row = df[((df['dimension'] == 'MRT') & (df['calendardate'] == date))]
+    mrq_good_row = mrq_row[constants.SF1_GOOD_INDICATORS]
+    mrt_good_row = mrt_row[constants.SF1_GOOD_INDICATORS]
+    isna_mrq = mrq_good_row.isna().sum().sum()
+    isna_mrt = mrt_good_row.isna().sum().sum()
+    mrq_arr = mrq_good_row.to_numpy()[0]
+    mrt_arr = mrt_good_row.to_numpy()[0]
 
-    return 0
+    mrq_arr = mrq_arr.reshape(17, 5)
+    mrt_arr = mrt_arr.reshape(17, 5)
+
+    zeros = np.zeros((17, 5), 'uint8')
+
+    rgb = np.dstack((mrq_arr, mrt_arr, zeros))
+
+    img = Image.fromarray(rgb, mode='RGB')
+    img.save(constants.PROJECT_PATH+'/images/'+filename, "PNG")
+    return (isna_mrq+isna_mrt)
 
 
 # for every ticker
-usable_data = 0
+images_df = pd.DataFrame(
+    columns=['image-filename', 'percent-price-change', 'missing-values', 'label', 'train'])
 for ticker in os.listdir(constants.DATA_PATH+'/SF1'):
     this_path = os.path.join(constants.DATA_PATH, 'SF1/'+ticker)
     if(os.path.isfile(this_path)):
@@ -74,15 +94,15 @@ for ticker in os.listdir(constants.DATA_PATH+'/SF1'):
         if(not has_data_for_testing(date, coverage_df)):
             continue
 
-        image_filename = ticker+'_'+date
+        image_filename = ticker+'_'+date+'.png'
         # calculate percent change in price
         price_change = percent_price_change(date, mr_df)
         # create image
-        image = mrq_mrt_image(date, mr_df)
+        total_isna = mrq_mrt_image(date, mr_df, image_filename)
+        images_df = images_df.append(
+            {'image-filename': image_filename, 'percent-price-change': price_change, 'missing-values': total_isna, 'label': 0, 'train': 0}, ignore_index=True)
 
-        print(ticker, date, price_change, image_filename)
-        usable_data += 1
         # store percent change and image filename in dataframe
 
-print(usable_data)
+images_df.to_csv(constants.PROJECT_PATH+'/image_data.csv')
 # fit stored percent changes in price to normal curve and report statistics
