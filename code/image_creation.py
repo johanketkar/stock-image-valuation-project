@@ -53,6 +53,7 @@ def percent_price_change(date_0, df):
 
 
 def mrq_mrt_image(date, df):
+
     return 0
 
 
@@ -74,14 +75,13 @@ for ticker in os.listdir(constants.DATA_PATH+'/SF1'):
             continue
 
         image_filename = ticker+'_'+date
+        # calculate percent change in price
         price_change = percent_price_change(date, mr_df)
+        # create image
         image = mrq_mrt_image(date, mr_df)
 
         print(ticker, date, price_change, image_filename)
         usable_data += 1
-
-        # if yes, calculate percent change in price
-        # and create image
         # store percent change and image filename in dataframe
 
 print(usable_data)
