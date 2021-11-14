@@ -64,21 +64,27 @@ def mrq_mrt_image(date, df, filename):
     mrq_arr = mrq_good_row.to_numpy()[0]
     mrt_arr = mrt_good_row.to_numpy()[0]
 
-    mrq_arr = mrq_arr.reshape(17, 5)
-    mrt_arr = mrt_arr.reshape(17, 5)
+    # mrq_arr = mrq_arr.reshape(17, 5)
+    # mrt_arr = mrt_arr.reshape(17, 5)
 
-    zeros = np.zeros((17, 5), 'uint8')
+    mrq_arr = mrq_arr.reshape(9, 9)
+    mrt_arr = mrt_arr.reshape(9, 9)
+
+    # zeros = np.zeros((17, 5), 'uint8')
+
+    zeros = np.zeros((9, 9), 'uint8')
 
     rgb = np.dstack((mrq_arr, mrt_arr, zeros))
 
     img = Image.fromarray(rgb, mode='RGB')
-    img.save(constants.PROJECT_PATH+'/images/'+filename, "PNG")
+    img.save(constants.PROJECT_PATH+'/images_81_pixels/'+filename, "PNG")
     return (isna_mrq+isna_mrt)
 
 
 # for every ticker
 images_df = pd.DataFrame(
-    columns=['image-filename', 'percent-price-change', 'missing-values', 'label', 'train'])
+    # columns=['image-filename', 'percent-price-change', 'missing-values', 'label', 'train'])
+    columns = ['image-filename', 'percent-price-change', 'missing-values'])
 for ticker in os.listdir(constants.DATA_PATH+'/SF1'):
     this_path = os.path.join(constants.DATA_PATH, 'SF1/'+ticker)
     if(os.path.isfile(this_path)):
@@ -100,9 +106,10 @@ for ticker in os.listdir(constants.DATA_PATH+'/SF1'):
         # create image
         total_isna = mrq_mrt_image(date, mr_df, image_filename)
         images_df = images_df.append(
-            {'image-filename': image_filename, 'percent-price-change': price_change, 'missing-values': total_isna, 'label': 0, 'train': 0}, ignore_index=True)
+            # {'image-filename': image_filename, 'percent-price-change': price_change, 'missing-values': total_isna, 'label': 0, 'train': 0}, ignore_index=True)
+            {'image-filename': image_filename, 'percent-price-change': price_change, 'missing-values': total_isna}, ignore_index=True)
 
         # store percent change and image filename in dataframe
 
-images_df.to_csv(constants.PROJECT_PATH+'/image_data.csv')
+images_df.to_csv(constants.PROJECT_PATH+'/image_data_81_pixels.csv')
 # fit stored percent changes in price to normal curve and report statistics

@@ -52,12 +52,26 @@ indicator_coverage_df = pd.read_csv(DATA_PATH+'/SF1/indicator_coverage.csv')
 all_indicators_list = indicator_coverage_df.columns.tolist()
 all_indicators_list.pop(0)
 SF1_INDICATORS = all_indicators_list
-good_indicator_list = []
 
-for indicator in all_indicators_list:
-    percent_covered = indicator_coverage_df[indicator][0]
-    if percent_covered > .90:
-        good_indicator_list.append(indicator)
+# good_indicator_list = []
 
+# for indicator in all_indicators_list:
+#     percent_covered = indicator_coverage_df[indicator][0]
+#     if percent_covered > .90:
+#         good_indicator_list.append(indicator)
+
+good_indicator_list = ['dps', 'sharefactor', 'shareswa', 'price', 'divyield',
+                       'cor', 'gp', 'opex', 'opinc', 'revenue', 'sgna', 'intexp',
+                       'taxexp', 'rnd', 'prefdivis', 'consolinc', 'ebit', 'ebt',
+                       'netinc', 'netinccmn', 'netincdis', 'netincnci', 'grossmargin',
+                       'netmargin', 'capex', 'ncfbus', 'ncfi', 'ncfinv', 'depamor',
+                       'ncfcommon', 'ncfdebt', 'ncfdiv', 'ncff', 'ncfo', 'sbcomp',
+                       'fcf', 'ncf', 'ebitda', 'ebitdamargin', 'ncfx', 'eps', 'epsusd',
+                       'payoutratio', 'sps', 'fcfps', 'epsdil', 'debt', 'payables',
+                       'taxliabilities', 'accoci', 'deferredrev', 'deposits', 'cashneq',
+                       'receivables', 'ppnenet', 'taxassets', 'intangibles', 'inventory',
+                       'investments', 'equity', 'liabilities', 'assets', 'invcap', 'tangibles',
+                       'de', 'bvps', 'tbvps', 'pe1', 'ps1', 'sharesbas', 'marketcap', 'pb', 'ps',
+                       'pe', 'retearn', 'ev', 'evebit', 'evebitda', 'investmentsc', 'assetsc', 'debtc']
 
 SF1_GOOD_INDICATORS = good_indicator_list
