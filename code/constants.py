@@ -6,6 +6,7 @@ import pandas as pd
 PROJECT_PATH = os.path.dirname(os.getcwd())
 DATA_PATH = os.path.join(PROJECT_PATH, 'data')
 CODE_PATH = os.path.join(PROJECT_PATH, 'code')
+IMAGE_81_PIXEL_PATH = os.path.join(PROJECT_PATH,'images_81_pixels')
 
 # quandl api key
 #API_KEY = "guVoWEQKcUx8-R9JxKbp"
@@ -75,3 +76,7 @@ good_indicator_list = ['dps', 'sharefactor', 'shareswa', 'price', 'divyield',
                        'pe', 'retearn', 'ev', 'evebit', 'evebitda', 'investmentsc', 'assetsc', 'debtc']
 
 SF1_GOOD_INDICATORS = good_indicator_list
+
+#transfer learning
+IMG_SHAPE = 224
+BATCH_SIZE = 32
