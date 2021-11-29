@@ -67,7 +67,7 @@ shuffle=True,
 target_size=(constants.IMG_SHAPE, constants.IMG_SHAPE),
 
 class_mode='categorical')
-print(train_data_gen.class_indices)
+#print(train_data_gen.class_indices)
 
 image_gen_test = ImageDataGenerator(rescale=1./255)
 test_data_gen = image_gen_test.flow_from_directory(batch_size=constants.BATCH_SIZE,
@@ -79,7 +79,7 @@ shuffle=True,
 target_size=(constants.IMG_SHAPE, constants.IMG_SHAPE),
 
 class_mode='categorical')
-print(train_data_gen.class_indices)
+#print(train_data_gen.class_indices)
 
 
 pre_trained_model = tf.keras.applications.VGG16(input_shape=(224,224,3), include_top=False, weights="imagenet")
@@ -95,7 +95,7 @@ last_output = last_layer.output
 x = tf.keras.layers.GlobalMaxPooling2D()(last_output)
 x = tf.keras.layers.Dense(512, activation='relu')(x)
 x = tf.keras.layers.Dropout(0.5)(x)
-x = tf.keras.layers.Dense(3, activation='softmax')(x)
+x = tf.keras.layers.Dense(5, activation='softmax')(x)
 
 model = tf.keras.Model(pre_trained_model.input, x)
 
