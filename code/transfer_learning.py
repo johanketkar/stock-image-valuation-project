@@ -85,7 +85,7 @@ class_mode='categorical')
 pre_trained_model = tf.keras.applications.VGG16(input_shape=(224,224,3), include_top=False, weights="imagenet")
 
 for layer in pre_trained_model.layers:
-    #print(layer.name)
+    #print(layer.output)
     layer.trainable = False
 
 
@@ -99,8 +99,10 @@ x = tf.keras.layers.Dense(5, activation='softmax')(x)
 
 model = tf.keras.Model(pre_trained_model.input, x)
 
-model.compile(optimizer='adam', loss=tf.keras.losses.categorical_crossentropy, metrics=['acc'])
+model.compile(optimizer='rmsprop', loss=tf.keras.losses.categorical_crossentropy, metrics=['acc', 'mse'])
 
 #print(model.summary())
 
-vgg16_classifier = model.fit(train_data_gen, steps_per_epoch=(total_train//constants.BATCH_SIZE), epochs = 5, validation_data=test_data_gen, validation_steps=(total_test//constants.BATCH_SIZE), batch_size = constants.BATCH_SIZE, verbose=1)
+train_history = model.fit(train_data_gen, steps_per_epoch=(total_train//constants.BATCH_SIZE), epochs = 1, verbose=1)
+
+model.save(constants.PROJECT_PATH+'/mymodel')

@@ -82,18 +82,3 @@ for i in range(len(image_data)):
 
 os.remove(constants.PROJECT_PATH + '/image_data_81_pixels.csv')
 image_data.to_csv(constants.PROJECT_PATH+'/image_data_81_pixels.csv')
-
-
-
-
-
-
-
-
-        
-
-
-
-
-
-
