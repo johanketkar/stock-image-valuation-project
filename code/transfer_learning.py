@@ -5,8 +5,6 @@ from PIL import Image
 from tensorflow.keras.preprocessing.image import ImageDataGenerator
 from tensorflow.keras.optimizers import Adam
 
-
-
 base_dir = constants.IMAGE_PATH
 
 train_dir = base_dir+'/train'
