@@ -27,7 +27,7 @@ class_mode='categorical')
 
 y_test = test_data_gen.labels
 
-y_pred = model.predict_classes(test_data_gen)
+y_pred = model.predict(test_data_gen, verbose=1)
 
 print(classification_report(y_test, y_pred))
 
