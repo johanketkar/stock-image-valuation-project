@@ -103,6 +103,6 @@ model.compile(optimizer='rmsprop', loss=tf.keras.losses.categorical_crossentropy
 
 #print(model.summary())
 
-train_history = model.fit(train_data_gen, steps_per_epoch=(total_train//constants.BATCH_SIZE), epochs = 1, verbose=1)
+train_history = model.fit(train_data_gen, steps_per_epoch=(total_train//constants.BATCH_SIZE), epochs = 5, verbose=1)
 
 model.save(constants.PROJECT_PATH+'/mymodel')
