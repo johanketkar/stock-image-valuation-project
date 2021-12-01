@@ -17,11 +17,11 @@ mean = np.mean(image_data['percent-price-change'])
 std_dev = np.std(image_data['percent-price-change'])
 
 cutoff_1_2 = mean - 1.5 * std_dev
-cutoff_2_3 = mean - 0.5 * std_dev
-cutoff_3_4 = mean + 0.5 * std_dev
+cutoff_2_3 = mean - 0.25 * std_dev
+cutoff_3_4 = mean + 0.25 * std_dev
 cutoff_4_5 = mean + 1.5 * std_dev
 
-images_path = os.path.join(constants.PROJECT_PATH, 'images_81_pixels')
+images_path = os.path.join(constants.PROJECT_PATH, 'images')
 files = os.listdir(images_path)
 
 count = 1
@@ -82,3 +82,4 @@ for i in range(len(image_data)):
 
 os.remove(constants.PROJECT_PATH + '/image_data_81_pixels.csv')
 image_data.to_csv(constants.PROJECT_PATH+'/image_data_81_pixels.csv')
+image_data.to_csv(constants.PROJECT_PATH+'/image_data.csv')

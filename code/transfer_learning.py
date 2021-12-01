@@ -7,7 +7,7 @@ from tensorflow.keras.optimizers import Adam
 
 
 
-base_dir = constants.IMAGE_81_PIXEL_PATH
+base_dir = constants.IMAGE_PATH
 
 train_dir = base_dir+'/train'
 train_ex_overvalued_dir = train_dir+'/extremely_overvalued'
@@ -55,8 +55,6 @@ print("TOTAl Testing images: ", total_test)
 
 
 
-
-
 image_gen_train = ImageDataGenerator(rescale=1./255)
 train_data_gen = image_gen_train.flow_from_directory(batch_size=constants.BATCH_SIZE,
 
@@ -67,25 +65,10 @@ shuffle=True,
 target_size=(constants.IMG_SHAPE, constants.IMG_SHAPE),
 
 class_mode='categorical')
-#print(train_data_gen.class_indices)
-
-image_gen_test = ImageDataGenerator(rescale=1./255)
-test_data_gen = image_gen_test.flow_from_directory(batch_size=constants.BATCH_SIZE,
-
-directory=test_dir,
-
-shuffle=True,
-
-target_size=(constants.IMG_SHAPE, constants.IMG_SHAPE),
-
-class_mode='categorical')
-#print(train_data_gen.class_indices)
-
 
 pre_trained_model = tf.keras.applications.VGG16(input_shape=(224,224,3), include_top=False, weights="imagenet")
 
 for layer in pre_trained_model.layers:
-    #print(layer.output)
     layer.trainable = False
 
 
@@ -100,8 +83,6 @@ x = tf.keras.layers.Dense(5, activation='softmax')(x)
 model = tf.keras.Model(pre_trained_model.input, x)
 
 model.compile(optimizer='rmsprop', loss=tf.keras.losses.categorical_crossentropy, metrics=['acc', 'mse'])
-
-#print(model.summary())
 
 train_history = model.fit(train_data_gen, steps_per_epoch=(total_train//constants.BATCH_SIZE), epochs = 5, verbose=1)
 

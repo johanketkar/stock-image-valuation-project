@@ -6,6 +6,7 @@ import pandas as pd
 PROJECT_PATH = os.path.dirname(os.getcwd())
 DATA_PATH = os.path.join(PROJECT_PATH, 'data')
 CODE_PATH = os.path.join(PROJECT_PATH, 'code')
+IMAGE_PATH = os.path.join(PROJECT_PATH, 'images')
 IMAGE_81_PIXEL_PATH = os.path.join(PROJECT_PATH,'images_81_pixels')
 
 # quandl api key
