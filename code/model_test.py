@@ -10,9 +10,9 @@ import numpy as np
 model = keras.models.load_model(constants.PROJECT_PATH+'/mymodel')
 
 
-base_dir = constants.IMAGE_81_PIXEL_PATH
+base_dir = constants.PROJECT_PATH
 
-test_dir = base_dir+'/test'
+test_dir = base_dir+'/images/test'
 
 image_gen_test = ImageDataGenerator(rescale=1./255)
 test_data_gen = image_gen_test.flow_from_directory(batch_size=constants.BATCH_SIZE,
