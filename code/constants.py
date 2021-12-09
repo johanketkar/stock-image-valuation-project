@@ -79,5 +79,5 @@ good_indicator_list = ['dps', 'sharefactor', 'shareswa', 'price', 'divyield',
 SF1_GOOD_INDICATORS = good_indicator_list
 
 #transfer learning
-IMG_SHAPE = 224
+IMG_SHAPE = 32
 BATCH_SIZE = 32

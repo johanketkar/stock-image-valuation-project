@@ -64,7 +64,7 @@ target_size=(constants.IMG_SHAPE, constants.IMG_SHAPE),
 
 class_mode='categorical')
 
-pre_trained_model = tf.keras.applications.VGG16(input_shape=(224,224,3), include_top=False)
+pre_trained_model = tf.keras.applications.VGG16(input_shape=(32,32,3), weights=None)
 
 #for layer in pre_trained_model.layers:
     #layer.trainable = False
