@@ -47,11 +47,11 @@ def quarter_is_usable(coverage_df, date):
         MRQ_past = ((coverage_df['dimension'] == 'MRQ') & coverage_df[dates[0]] == 1).any()
         MRQ_current = ((coverage_df['dimension'] == 'MRQ') & coverage_df[dates[1]] == 1).any()
         MRT_current = ((coverage_df['dimension'] == 'MRT')& coverage_df[dates[1]] == 1).any()
-        price_2_q_future = ((coverage_df['dimension'] == 'MRQ') & coverage_df[date[2]] == 1).any()
-        price_3_q_future = ((coverage_df['dimension'] == 'MRQ') & coverage_df[date[3]] == 1).any()
-        price_4_q_future = ((coverage_df['dimension'] == 'MRQ') & coverage_df[date[4]] == 1).any()
+        price_2_q_future = ((coverage_df['dimension'] == 'MRQ') & coverage_df[dates[2]] == 1).any()
+        price_3_q_future = ((coverage_df['dimension'] == 'MRQ') & coverage_df[dates[3]] == 1).any()
+        price_4_q_future = ((coverage_df['dimension'] == 'MRQ') & coverage_df[dates[4]] == 1).any()
 
-        if(MRQ_past and MRQ_current and price_2_q_future and price_3_q_future and price_4_q_future):
+        if(MRQ_past and MRQ_current and MRT_current and price_2_q_future and price_3_q_future and price_4_q_future):
             return dates
         else:
             return False
@@ -79,11 +79,12 @@ def mrq_mrt_image(dates, df, filename):
     mrq_past = mrq_past.reshape(9, 9)
     mrq_current = mrq_current.reshape(9, 9)
     mrt = mrt.reshape(9,9)
+    mrt = np.transpose(mrt)
 
     zeros = np.zeros((9, 9), np.float64)
     ones = zeros+1
 
-    rgb = np.dstack((mrq_past, mrq_current, mrt, ones))
+    rgb = np.dstack((mrq_past, mrq_current, mrt))
     img.imsave(constants.IMAGE_PATH+'/'+filename+'.png', rgb)
     return 0
 
