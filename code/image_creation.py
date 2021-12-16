@@ -75,6 +75,7 @@ def mrq_mrt_image(date, df, filename):
     zeros = np.zeros((9, 9), 'uint8')
 
     rgb = np.dstack((mrq_arr, mrt_arr, zeros))
+    print(rgb)
 
     img = Image.fromarray(rgb, mode='RGB')
     img.save(constants.PROJECT_PATH+'/images_81_pixels/'+filename, "PNG")

@@ -1,13 +1,16 @@
 import os
 import pandas as pd 
+import matplotlib.image as img
 from PIL import Image
 import constants
 import numpy as np
 
-image = Image.open(constants.IMAGE_PATH+'/AAPL_test1')
+image = img.imread(constants.IMAGE_PATH+'/1998-03-31-LVLT.png')
+imag2 = img.imread(constants.IMAGE_PATH+'/2004-12-31-LVLT.png')
 
-image_sequence = image.getdata()
+imag3 = img.imread(constants.IMAGE_PATH+'/2005-06-30-LVLT.png')
 
-image_array = np.array(image_sequence)
 
-print(image_array)
+print(image)
+print(imag2)
+print(imag3)
